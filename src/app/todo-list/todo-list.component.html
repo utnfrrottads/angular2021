@@ -1,0 +1,14 @@
+<table>
+    <tr>
+        <th *ngFor="let column of headers">
+            {{column}}
+        </th>
+    </tr>
+    <tr *ngFor="let task of list"> 
+        <td>{{task.id}}</td>
+        <td [class.completed]="task.isCompleted">{{task.description}}</td>
+        <td>{{task.isCompleted}}</td>
+        <button style="margin: 10px" class="btn btn-danger"(click)="deleteTask(task)">Delete task</button>
+        <button class="btn btn-warning"(click)="changeStatus(task)">Change status</button>
+    </tr>
+</table>

@@ -1,0 +1,8 @@
+<footer *ngIf="list.length >0">
+    <div class="container">
+        <p>
+            Tasks completed: {{ getCompletedItems() }}
+            Tasks pending: {{ getPendingItems() }}
+        </p>
+    </div>
+</footer>
