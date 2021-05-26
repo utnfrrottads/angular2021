@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+import {TodoItem} from '../model/todo-item';
 
 @Component({
   selector: 'app-todo-app',
@@ -7,15 +9,19 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TodoAppComponent implements OnInit {
 
-  arr:string[] = ["hola","loco","como","estas"];
-  @Input() value:any = 'valor del todo-app';
+  @Input() list: TodoItem[] = [];
+
+  @Output() taskRemoved = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  add(value:any){
-    this.arr.push(value);
+  deleteTask(task:any){
+    this.taskRemoved.emit(task);
   }
-
+  changeStatus(task:TodoItem){
+    task.toggleCompleted();
+  }
 }

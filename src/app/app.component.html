@@ -1,10 +1,10 @@
 <h1>{{title}}</h1>
 
 <app-todo-form
-(oCont)="cambiarTitulo($event)"
-[iCont]="title"
+(addTask)="addTask($event)"
 ></app-todo-form>
 
 <app-todo-app
-[value]="title"
+(taskRemoved)="taskRemoved($event)"
+[list]="list"
 ></app-todo-app>

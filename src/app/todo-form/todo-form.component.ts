@@ -8,18 +8,15 @@ import {TodoAppComponent} from '../todo-app/todo-app.component';
 })
 export class TodoFormComponent implements OnInit {
 
-  @Input() iCont = '';
-  @Output() oCont = new EventEmitter();
-  //todoApp?: TodoAppComponent;
-  @Input() todoApp?: TodoAppComponent
+  @Output() addTask = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
   }
   add(Input:any){
-    //this.iCont = Input.value;
-    this.oCont.emit(Input.value);
-    this.todoApp?.add(Input.value);
+    this.addTask.emit(Input.value);
+    Input.value = '';
   }
 
 }

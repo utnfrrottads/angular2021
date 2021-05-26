@@ -1,6 +1,6 @@
 export class TodoItem {
-    id: any;
-    description: any;
+    id!: number;
+    description!: string;
     isCompleted: boolean = false;
   
     toggleCompleted() {

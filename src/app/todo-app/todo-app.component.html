@@ -1,6 +1,7 @@
 <p>todo-app works!</p>
-<button (click)="add('pepe')" >boton</button>
 <ul>
-    <li *ngFor="let item of arr">{{item}}</li>
+    <li *ngFor="let task of list">{{task.id}} {{task.description}} {{task.isCompleted}}
+    <button (click)="deleteTask(task)" >Delete Task</button>
+    <button (click)="changeStatus(task)" >Change status</button>
+    </li>
 </ul>
-<p>{{value}}</p>
