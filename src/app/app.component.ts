@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular2021';
+
+
+  cambiarTitulo(event:any){
+    this.title = event;
+  }
+
 }
