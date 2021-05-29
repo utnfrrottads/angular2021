@@ -1,0 +1,19 @@
+<p>todo-app works!</p>
+<div id="container">
+<ul>
+    <li *ngFor="let task of list" [ngClass]="task.isCompleted ? 'completado' : 'pendiente'" >
+        {{task.description}}
+    <button 
+    [ngClass]="['btn btn-danger', 'boton']" 
+    (click)="deleteTask(task)" >
+    X
+    </button>
+
+    <button 
+    [ngClass]="'btn btn-info'" 
+    (click)="changeStatus(task)" >
+    V
+    </button>
+    </li>
+</ul>
+</div>

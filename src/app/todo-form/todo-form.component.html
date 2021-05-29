@@ -1,0 +1,6 @@
+<label [ngClass]="'form-label'" id="label"  for="text">Ingrese Tarea</label><br>
+<input type="text" name="text" id="text" #Input >
+<button style="margin: 10px" class="btn btn-primary"
+(click)="add(Input)" >
+Agregar
+</button>
