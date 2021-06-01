@@ -40,8 +40,12 @@ export class TodoService {
   }
 
   modifyTaskStatus(task: TodoItem){
-    task.toggleCompleted()
-    this.saveLocalStorage()
+    this.list.forEach(item => {
+      if(item.id == task.id){
+        item.isCompleted = !item.isCompleted
+        this.saveLocalStorage()
+      } 
+    });
   }
 
   removeTask(task: TodoItem){
