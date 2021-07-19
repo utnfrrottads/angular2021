@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-todo-edit',
@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoEditComponent implements OnInit {
 
-  constructor() { }
+  @Input() description!: string
+  @Output() edit = new EventEmitter()
 
   ngOnInit(): void {
+  }
+
+  toggleShown(){
+  }
+
+  editTask(valueText: any){
+    //this.edit.emit(valueText.value)
+    console.log(this.description)
+    return false
+  }
+
+  getDescription(){
+    return this.description
   }
 
 }

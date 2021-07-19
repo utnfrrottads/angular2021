@@ -1,3 +1,4 @@
+import { isNgTemplate } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { TodoItem } from './model/todo-item';
 
@@ -9,6 +10,7 @@ export class TodoService {
   list: TodoItem[] = [];
   lastItemId!: number;
   task!: TodoItem
+  description!: string
 
   constructor() { 
   }
@@ -57,11 +59,13 @@ export class TodoService {
     }
   }
 
-  modifyTaskDescription(task: TodoItem){
+  modifyTaskDescription(task: TodoItem): string{
     this.list.forEach((item) =>{
       if(item.id == task.id){
+        this.description = item.description
       }
     });
+    return this.description
   }
 
   saveLocalStorage(){

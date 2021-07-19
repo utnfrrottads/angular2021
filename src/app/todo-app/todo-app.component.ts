@@ -9,6 +9,8 @@ import { TodoService } from '../todo.service';
 })
 export class TodoAppComponent implements OnInit {
 
+  taskDescription!: string
+  
   constructor(
     private service: TodoService
   ) { }
@@ -33,6 +35,10 @@ export class TodoAppComponent implements OnInit {
   }
 
   onItemModified(event: TodoItem){
-    this.service.modifyTaskDescription(event)
+    this.taskDescription = this.service.modifyTaskDescription(event)
+  }
+
+  getTaskDescription(){
+    return this.taskDescription
   }
 }

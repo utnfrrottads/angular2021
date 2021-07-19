@@ -1,1 +1,5 @@
-<p>todo-edit works!</p>
+<form (submit)="editTask(valueText)">
+    <input type="text" value="getDescription()" #valueText required>
+    <p>{{ getDescription() }}</p>
+    <button style="margin: 10px" class="btn btn-primary">Confirm</button>
+</form>

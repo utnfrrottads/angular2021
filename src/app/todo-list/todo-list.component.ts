@@ -13,7 +13,7 @@ export class TodoListComponent implements OnInit {
   @Output() itemStateChanged = new EventEmitter();
   @Output() itemModified = new EventEmitter();
 
-  headers: string[] = ['Id', 'Description', 'Status'];
+  headers: string[] = ['Id', 'Description', 'Status', 'Action'];
 
   constructor() { }
 
