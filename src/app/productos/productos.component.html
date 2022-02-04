@@ -1,0 +1,95 @@
+<div class="container">
+  <h2>
+    <button type="button" [routerLink]="['new']" class="btn btn-primary btn-icon" title="Crear Producto">
+      <fa-icon icon="plus"></fa-icon>
+    </button> Productos
+  </h2>
+
+  <div class="card">
+    <form class="form-filter" name="myForm" role="form" novalidate (ngSubmit)="onFilter()" [formGroup]="myForm">
+      <fa-icon *ngIf="collapsedFilter" icon="chevron-up" class="pointer filter-icon"
+        (click)="collapsedFilter = !collapsedFilter">
+      </fa-icon>
+      <fa-icon *ngIf="!collapsedFilter" icon="chevron-down" class="pointer filter-icon"
+        (click)="collapsedFilter = !collapsedFilter">
+      </fa-icon>
+
+      <ng-container *ngIf="!collapsedFilter">
+        <div class="row">
+          <div class="col-lg-4">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" name="descripcion" id="descripcion" formControlName="descripcion" />
+          </div>
+
+          <div class="col-lg-3">
+            <label for="categoriaId" class="form-label">Categoría</label>
+            <select type="text" class="form-control" name="categoriaId" id="categoriaId" formControlName="categoriaId">
+              <option [ngValue]="null">Seleccione</option>
+              <option [value]="categoria.id" *ngFor="let categoria of categorias">{{categoria.descripcion}}</option>
+            </select>
+          </div>
+
+          <div class="col-lg-2">
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="verInactivos">Ver inactivos</label>
+              <input class="form-check-input" type="checkbox" name="verInactivos" id="verInactivos"
+                formControlName="verInactivos">
+            </div>
+          </div>
+
+          <div class="col-lg-2">
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="requiereStock">Requieren stock</label>
+              <input class="form-check-input" type="checkbox" name="requiereStock" id="requiereStock"
+                formControlName="requiereStock">
+            </div>
+          </div>
+        </div>
+
+        <div class="button-form-filter">
+          <button type="button" class="btn btn-secondary" (click)="clearFilter()" title="Limpiar">
+            <fa-icon icon="broom"></fa-icon>&nbsp;Limpiar
+          </button>
+          <button type="submit" [disabled]="loading" class="btn btn-primary" title="Filtrar">
+            <fa-icon icon="filter"></fa-icon>&nbsp;Filtrar
+          </button>
+        </div>
+      </ng-container>
+    </form>
+  </div>
+
+  <ngx-datatable class="material striped" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+    rowHeight="auto" [loadingIndicator]="loading" [externalSorting]="true" (sort)="onSort($event)"
+    [externalPaging]="true" [count]="page.totalElements" [offset]="page.offset" [limit]="page.size"
+    (page)="setPage($event)">
+    <ngx-datatable-column name="Descripción" prop="descripcion"></ngx-datatable-column>
+    <ngx-datatable-column name="Categoría" prop="categoria.descripcion"></ngx-datatable-column>
+    <ngx-datatable-column name="Stock" prop="stock"></ngx-datatable-column>
+    <ngx-datatable-column name="Cant. mín" prop="cantidadMinima"></ngx-datatable-column>
+    <ngx-datatable-column name="Precio Venta" prop="precioVenta">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{ value | currency :'$':'symbol':'1.2-2' }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Activo" prop="activo">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <fa-icon *ngIf="value" icon="check-square" class="text-success"></fa-icon>
+        <fa-icon *ngIf="!value" icon="square" class="text-danger"></fa-icon>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="" prop="id" [sortable]="false" [cellClass]="'column-actions'">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <button type="button" [routerLink]="['./', value, 'edit']" class="btn btn-primary" title="Editar">
+          <fa-icon icon="pencil-alt"></fa-icon>
+        </button>
+        <button type="button" [routerLink]="['./', value, 'view']" class="btn btn-primary" title="Ver">
+          <fa-icon icon="eye"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-danger" title="Eliminar" (click)="delete(value)">
+          <fa-icon icon="times"></fa-icon>
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+
+</div>
